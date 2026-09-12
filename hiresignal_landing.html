@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HireSignal — See the fit before the interview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050607;
+  --bg-2:#0A0D10;
+  --line:#1B2027;
+  --text:#F2F5F7;
+  --text-dim:#8C97A3;
+  --text-faint:#4E5762;
+  --signal:#3FD17E;
+  --violet:#8B7CFF;
+  --cyan:#4FD8E0;
+  --f-display:'Space Grotesk',sans-serif;
+  --f-body:'Inter',sans-serif;
+  --f-mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--f-body);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{ background:var(--signal); color:#04160C; }
+
+/* background texture: dot grid + spotlight that follows cursor */
+.grid-bg{
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size:26px 26px;
+  -webkit-mask-image:radial-gradient(600px circle at var(--mx,50%) var(--my,20%), rgba(0,0,0,0.9), transparent 70%);
+  mask-image:radial-gradient(600px circle at var(--mx,50%) var(--my,20%), rgba(0,0,0,0.9), transparent 70%);
+  transition:mask-position .1s ease;
+}
+.glow-blob{
+  position:fixed; z-index:0; pointer-events:none; filter:blur(90px); opacity:0.35; border-radius:50%;
+}
+.glow-blob.a{ width:520px;height:520px; top:-120px; left:-100px; background:var(--violet); animation:drift1 22s ease-in-out infinite; }
+.glow-blob.b{ width:480px;height:480px; bottom:-160px; right:-120px; background:var(--signal); animation:drift2 26s ease-in-out infinite; }
+@keyframes drift1{ 0%,100%{ transform:translate(0,0);} 50%{ transform:translate(60px,40px);} }
+@keyframes drift2{ 0%,100%{ transform:translate(0,0);} 50%{ transform:translate(-50px,-30px);} }
+
+/* nav */
+nav{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 40px;
+  backdrop-filter:blur(14px) saturate(140%);
+  background:rgba(5,6,7,0.55);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.brand{ display:flex; align-items:center; gap:10px; }
+.brand span{ font-family:var(--f-display); font-weight:600; font-size:17px; letter-spacing:0.2px; }
+nav ul{ display:flex; gap:34px; list-style:none; }
+nav a{ color:var(--text-dim); text-decoration:none; font-size:14px; transition:color .2s; }
+nav a:hover{ color:var(--text); }
+.nav-cta{
+  background:var(--text); color:#05070A; padding:9px 18px; border-radius:100px;
+  font-size:13.5px; font-weight:600; text-decoration:none; transition:transform .2s ease, background .2s ease;
+}
+.nav-cta:hover{ transform:translateY(-1px); background:var(--signal); }
+
+section{ position:relative; z-index:1; padding:0 40px; }
+
+/* hero */
+.hero{
+  min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding-top:80px;
+}
+.eyebrow{
+  font-family:var(--f-mono); font-size:12.5px; color:var(--text-dim);
+  border:1px solid var(--line); padding:6px 14px; border-radius:100px; margin-bottom:28px;
+  display:inline-flex; align-items:center; gap:8px;
+}
+.eyebrow .dot{ width:6px;height:6px;border-radius:50%; background:var(--signal); box-shadow:0 0 8px var(--signal); }
+.hero h1{
+  font-family:var(--f-display); font-weight:700; line-height:1.04;
+  font-size:clamp(42px, 7vw, 84px); max-width:1000px; letter-spacing:-1.5px;
+}
+.hero h1 .grad{
+  background:linear-gradient(100deg, var(--signal), var(--cyan) 45%, var(--violet) 90%);
+  background-size:200% auto;
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  animation:sheen 6s linear infinite;
+}
+@keyframes sheen{ to{ background-position:200% center; } }
+.hero p{
+  margin-top:24px; color:var(--text-dim); font-size:18px; max-width:560px; line-height:1.6;
+}
+.hero-actions{ margin-top:40px; display:flex; gap:14px; }
+.btn-primary{
+  background:var(--text); color:#05070A; padding:14px 26px; border-radius:100px;
+  font-weight:600; font-size:15px; text-decoration:none; transition:all .25s ease;
+  box-shadow:0 0 0 rgba(63,209,126,0);
+}
+.btn-primary:hover{ background:var(--signal); box-shadow:0 8px 30px rgba(63,209,126,0.35); transform:translateY(-2px); }
+.btn-ghost{
+  border:1px solid var(--line); color:var(--text); padding:14px 26px; border-radius:100px;
+  font-size:15px; text-decoration:none; transition:border-color .25s ease, background .25s ease;
+}
+.btn-ghost:hover{ border-color:var(--text-dim); background:rgba(255,255,255,0.03); }
+
+/* floating score chip */
+.float-chip{
+  margin-top:60px; font-family:var(--f-mono); font-size:13px; color:var(--text-dim);
+  border:1px solid var(--line); border-radius:14px; padding:14px 20px;
+  display:flex; align-items:center; gap:18px; background:rgba(255,255,255,0.02);
+  animation:float 5s ease-in-out infinite;
+}
+@keyframes float{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-8px);} }
+.float-chip b{ color:var(--signal); font-size:16px; }
+
+/* section shared reveal */
+.reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease; }
+.reveal.in{ opacity:1; transform:translateY(0); }
+.reveal-scale{ opacity:0; transform:scale(0.94); transition:opacity .9s ease, transform .9s ease; }
+.reveal-scale.in{ opacity:1; transform:scale(1); }
+.reveal-blur{ opacity:0; filter:blur(10px); transition:opacity 1s ease, filter 1s ease; }
+.reveal-blur.in{ opacity:1; filter:blur(0); }
+
+/* steps */
+.steps{ max-width:1080px; margin:200px auto; }
+.section-tag{ font-family:var(--f-mono); font-size:12.5px; color:var(--signal); margin-bottom:14px; }
+.steps h2{ font-family:var(--f-display); font-size:clamp(28px,4vw,42px); max-width:640px; line-height:1.15; margin-bottom:70px; }
+.step-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+.step-card{
+  border:1px solid var(--line); border-radius:16px; padding:28px; background:linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
+  transition:border-color .3s ease, transform .3s ease;
+}
+.step-card:hover{ border-color:rgba(255,255,255,0.18); transform:translateY(-4px); }
+.step-num{ font-family:var(--f-mono); color:var(--text-faint); font-size:13px; margin-bottom:18px; }
+.step-card h3{ font-family:var(--f-display); font-size:19px; margin-bottom:10px; }
+.step-card p{ color:var(--text-dim); font-size:14.5px; line-height:1.6; }
+
+/* product preview */
+.preview-wrap{ max-width:1100px; margin:220px auto; text-align:center; }
+.preview-wrap h2{ font-family:var(--f-display); font-size:clamp(28px,4vw,42px); margin-bottom:60px; }
+.mock{
+  border:1px solid var(--line); border-radius:20px; overflow:hidden;
+  background:var(--bg-2); text-align:left;
+  box-shadow:0 40px 100px -30px rgba(0,0,0,0.7);
+  transform:perspective(1200px) rotateX(4deg);
+}
+.reveal-scale.in .mock{ transform:perspective(1200px) rotateX(0deg); }
+.mock-bar{ display:flex; gap:6px; padding:14px 18px; border-bottom:1px solid var(--line); }
+.mock-bar span{ width:10px;height:10px;border-radius:50%; background:var(--line); }
+.mock-body{ display:grid; grid-template-columns:1fr 1.4fr; gap:0; }
+.mock-side{ padding:26px; border-right:1px solid var(--line); }
+.mock-label{ font-size:11.5px; color:var(--text-faint); margin-bottom:8px; font-family:var(--f-mono); }
+.mock-box{ border:1px dashed var(--line); border-radius:8px; padding:16px; font-size:12.5px; color:var(--text-dim); margin-bottom:18px; }
+.mock-btn{ background:var(--signal); color:#04160C; font-weight:600; font-size:13px; padding:10px 16px; border-radius:6px; display:inline-block; }
+.mock-main{ padding:26px; }
+.mock-score{ font-family:var(--f-display); font-size:44px; font-weight:700; color:var(--signal); }
+.mock-meter{ display:flex; gap:3px; align-items:flex-end; height:34px; margin:14px 0 24px; }
+.mock-meter span{ flex:1; background:var(--line); border-radius:1px; }
+.mock-meter span.on{ background:var(--signal); }
+.mock-chips{ display:flex; flex-wrap:wrap; gap:6px; }
+.mock-chip{ font-family:var(--f-mono); font-size:11px; padding:5px 9px; border-radius:4px; border:1px solid var(--line); color:var(--text-dim); }
+.mock-chip.on{ color:var(--signal); border-color:rgba(63,209,126,0.3); background:rgba(63,209,126,0.08); }
+
+/* stats band */
+.stats{ max-width:1080px; margin:220px auto; display:grid; grid-template-columns:repeat(4,1fr); gap:20px; text-align:center; }
+.stat-num{ font-family:var(--f-display); font-size:clamp(32px,4vw,48px); font-weight:700; }
+.stat-num .u{ font-size:22px; color:var(--text-dim); }
+.stat-k{ color:var(--text-dim); font-size:13.5px; margin-top:8px; }
+
+/* cta */
+.cta{ max-width:760px; margin:220px auto 160px; text-align:center; }
+.cta h2{ font-family:var(--f-display); font-size:clamp(30px,5vw,52px); line-height:1.1; }
+.cta p{ color:var(--text-dim); margin:18px 0 36px; font-size:16px; }
+
+footer{
+  border-top:1px solid var(--line); padding:32px 40px; display:flex; justify-content:space-between;
+  color:var(--text-faint); font-size:13px; position:relative; z-index:1;
+}
+
+@media (max-width:760px){
+  .step-grid{ grid-template-columns:1fr; }
+  .mock-body{ grid-template-columns:1fr; }
+  .mock-side{ border-right:none; border-bottom:1px solid var(--line); }
+  .stats{ grid-template-columns:repeat(2,1fr); }
+  nav ul{ display:none; }
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg" id="gridBg"></div>
+<div class="glow-blob a"></div>
+<div class="glow-blob b"></div>
+
+<nav>
+  <div class="brand">
+    <svg width="26" height="26" viewBox="0 0 30 30" fill="none">
+      <path d="M1 15 L7 15 L10 6 L14 24 L17 12 L20 18 L23 15 L29 15" stroke="#3FD17E" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>HireSignal</span>
+  </div>
+  <ul>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#preview">Product</a></li>
+    <li><a href="#stats">Numbers</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">Try it free</a>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow"><span class="dot"></span> now scoring in under 1.4s</div>
+  <h1>See the fit,<br><span class="grad">before the interview.</span></h1>
+  <p>HireSignal reads every resume the way an ATS does — then tells you what it actually found: matched skills, missing ones, and the red flags a recruiter would catch.</p>
+  <div class="hero-actions">
+    <a href="#preview" class="btn-primary">See a live report</a>
+    <a href="#how" class="btn-ghost">How scoring works</a>
+  </div>
+  <div class="float-chip">fit score &nbsp;<b>78/100</b>&nbsp; · &nbsp;14 skills matched &nbsp;·&nbsp; 3 flags found</div>
+</section>
+
+<section class="steps" id="how">
+  <div class="reveal">
+    <div class="section-tag">01 — how it scores</div>
+    <h2>Three signals combined into one number you can actually act on.</h2>
+  </div>
+  <div class="step-grid">
+    <div class="step-card reveal">
+      <div class="step-num">01</div>
+      <h3>Text signal</h3>
+      <p>Resume and JD are parsed into clean text, then compared with TF-IDF cosine similarity — the base fit score.</p>
+    </div>
+    <div class="step-card reveal" style="transition-delay:.1s">
+      <div class="step-num">02</div>
+      <h3>Skill signal</h3>
+      <p>A 300+ term taxonomy extracts real skill overlap, not just keyword echoes, and weights it into the final score.</p>
+    </div>
+    <div class="step-card reveal" style="transition-delay:.2s">
+      <div class="step-num">03</div>
+      <h3>Red-flag signal</h3>
+      <p>Rule-based checks catch what an ATS would silently reject — gaps, formatting issues, inconsistent dates.</p>
+    </div>
+  </div>
+</section>
+
+<section class="preview-wrap" id="preview">
+  <div class="reveal-scale">
+    <h2>The report, not just the score.</h2>
+    <div class="mock">
+      <div class="mock-bar"><span></span><span></span><span></span></div>
+      <div class="mock-body">
+        <div class="mock-side">
+          <div class="mock-label">resume</div>
+          <div class="mock-box">priya_sharma_resume.pdf</div>
+          <div class="mock-label">job description</div>
+          <div class="mock-box">Backend Engineer — Payments Team. 3+ years Python/Go, SQL, distributed systems...</div>
+          <span class="mock-btn">Score this fit</span>
+        </div>
+        <div class="mock-main">
+          <div class="mock-score">78<span style="font-size:18px;color:var(--text-dim)">/100</span></div>
+          <div class="mock-meter">
+            <span class="on" style="height:30%"></span><span class="on" style="height:55%"></span>
+            <span class="on" style="height:70%"></span><span class="on" style="height:60%"></span>
+            <span class="on" style="height:85%"></span><span class="on" style="height:65%"></span>
+            <span style="height:35%"></span><span style="height:20%"></span><span style="height:15%"></span>
+          </div>
+          <div class="mock-chips">
+            <span class="mock-chip on">python</span>
+            <span class="mock-chip on">postgresql</span>
+            <span class="mock-chip on">docker</span>
+            <span class="mock-chip on">rest apis</span>
+            <span class="mock-chip">kafka</span>
+            <span class="mock-chip">aws</span>
+            <span class="mock-chip">go</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats" id="stats">
+  <div class="reveal"><div class="stat-num" data-count="86.2"><span class="u">%</span></div><div class="stat-k">precision</div></div>
+  <div class="reveal" style="transition-delay:.1s"><div class="stat-num" data-count="81.7"><span class="u">%</span></div><div class="stat-k">recall</div></div>
+  <div class="reveal" style="transition-delay:.2s"><div class="stat-num" data-count="1.4"><span class="u">s</span></div><div class="stat-k">p95 latency</div></div>
+  <div class="reveal" style="transition-delay:.3s"><div class="stat-num" data-count="312"><span class="u"></span></div><div class="stat-k">skills in taxonomy</div></div>
+</section>
+
+<section class="cta" id="cta">
+  <div class="reveal-blur">
+    <h2>Score your first resume in two minutes.</h2>
+    <p>Drop a resume and a job description. Get a fit score, matched skills, and every red flag — before you ever pick up the phone.</p>
+    <a href="#" class="btn-primary">Get started free</a>
+  </div>
+</section>
+
+<footer>
+  <span>HireSignal</span>
+  <span>Built for recruiters and hiring engineers</span>
+</footer>
+
+<script>
+// cursor-follow spotlight on the dot grid
+const gridBg = document.getElementById('gridBg');
+window.addEventListener('mousemove', (e) => {
+  gridBg.style.setProperty('--mx', e.clientX + 'px');
+  gridBg.style.setProperty('--my', e.clientY + 'px');
+});
+
+// scroll reveal
+const revealEls = document.querySelectorAll('.reveal, .reveal-scale, .reveal-blur');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+revealEls.forEach(el => io.observe(el));
+
+// animated counters for stats
+const counters = document.querySelectorAll('[data-count]');
+const cIo = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    cIo.unobserve(entry.target);
+    const target = parseFloat(entry.target.dataset.count);
+    const unit = entry.target.querySelector('.u');
+    const unitText = unit ? unit.textContent : '';
+    const isInt = Number.isInteger(target);
+    let cur = 0;
+    const duration = 1200;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / duration, 1);
+      cur = target * p;
+      entry.target.firstChild.textContent = isInt ? Math.round(cur) : cur.toFixed(1);
+      if (p < 1) requestAnimationFrame(tick);
+      else entry.target.firstChild.textContent = isInt ? target : target.toFixed(1);
+    }
+    entry.target.textContent = '';
+    entry.target.appendChild(document.createTextNode('0'));
+    if (unit) entry.target.appendChild(unit);
+    requestAnimationFrame(tick);
+  });
+}, { threshold: 0.5 });
+counters.forEach(el => cIo.observe(el));
+</script>
+
+</body>
+</html>

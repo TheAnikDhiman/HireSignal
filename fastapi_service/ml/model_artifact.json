@@ -1,0 +1,148 @@
+{
+  "dataset_size": 500,
+  "train_samples": 400,
+  "test_samples": 100,
+  "macro_precision": 0.9159,
+  "macro_recall": 0.4339,
+  "macro_f1": 0.5459,
+  "micro_precision": 0.8833,
+  "target_met_85_precision": true,
+  "per_class_metrics": {
+    "STRONG_HIRE_FIT": {
+      "precision": 0.8333,
+      "recall": 0.4167,
+      "f1_score": 0.5556,
+      "support": 12,
+      "tp": 5,
+      "fp": 1,
+      "fn": 7
+    },
+    "TECH_STACK_MATCH": {
+      "precision": 0.8261,
+      "recall": 0.6552,
+      "f1_score": 0.7308,
+      "support": 29,
+      "tp": 19,
+      "fp": 4,
+      "fn": 10
+    },
+    "DOMAIN_EXPERIENCE": {
+      "precision": 0.92,
+      "recall": 0.7188,
+      "f1_score": 0.807,
+      "support": 32,
+      "tp": 23,
+      "fp": 2,
+      "fn": 9
+    },
+    "SENIORITY_ALIGNMENT": {
+      "precision": 1.0,
+      "recall": 0.1786,
+      "f1_score": 0.303,
+      "support": 28,
+      "tp": 5,
+      "fp": 0,
+      "fn": 23
+    },
+    "INTERVIEW_PRIORITY": {
+      "precision": 1.0,
+      "recall": 0.2,
+      "f1_score": 0.3333,
+      "support": 5,
+      "tp": 1,
+      "fp": 0,
+      "fn": 4
+    }
+  },
+  "weights": {
+    "STRONG_HIRE_FIT": {
+      "intercept": -0.5329,
+      "weights": [
+        0.3967,
+        0.5489,
+        0.4585,
+        0.2451,
+        0.1797,
+        0.2728,
+        0.1247,
+        0.5304,
+        -0.4857
+      ],
+      "threshold": 0.8
+    },
+    "TECH_STACK_MATCH": {
+      "intercept": -0.8418,
+      "weights": [
+        0.5133,
+        0.5602,
+        1.3423,
+        0.704,
+        0.5286,
+        0.2306,
+        0.4614,
+        0.4604,
+        -0.303
+      ],
+      "threshold": 0.7
+    },
+    "DOMAIN_EXPERIENCE": {
+      "intercept": -0.8219,
+      "weights": [
+        0.3119,
+        0.2569,
+        0.3736,
+        0.1349,
+        0.4479,
+        0.5288,
+        1.9553,
+        0.1517,
+        -0.2133
+      ],
+      "threshold": 0.62
+    },
+    "SENIORITY_ALIGNMENT": {
+      "intercept": -0.9539,
+      "weights": [
+        0.1292,
+        0.0802,
+        -0.0105,
+        0.0312,
+        0.2896,
+        0.2258,
+        1.0202,
+        1.3168,
+        -0.2852
+      ],
+      "threshold": 0.8
+    },
+    "INTERVIEW_PRIORITY": {
+      "intercept": -0.2856,
+      "weights": [
+        0.1518,
+        0.3118,
+        0.2908,
+        0.0652,
+        0.0778,
+        0.1425,
+        0.0906,
+        0.7014,
+        -0.6788
+      ],
+      "threshold": 0.82
+    }
+  },
+  "labels": [
+    "STRONG_HIRE_FIT",
+    "TECH_STACK_MATCH",
+    "DOMAIN_EXPERIENCE",
+    "SENIORITY_ALIGNMENT",
+    "INTERVIEW_PRIORITY"
+  ],
+  "descriptions": {
+    "STRONG_HIRE_FIT": "High holistic alignment across technical skills and core requirements (> 75% match).",
+    "TECH_STACK_MATCH": "Meets or exceeds core required programming languages and primary frameworks.",
+    "DOMAIN_EXPERIENCE": "Demonstrates relevant industry and architectural domain exposure (e.g. distributed systems, payments, cloud).",
+    "SENIORITY_ALIGNMENT": "Experience level, scope of ownership, and system design complexity match the job level.",
+    "INTERVIEW_PRIORITY": "Top candidate tier recommended for immediate fast-track technical screen."
+  }
+}

@@ -1,0 +1,24 @@
+Senior Backend Engineer — Payments Platform
+Company: Stripe
+Location: San Francisco, CA / Remote
+
+About The Role:
+We are looking for an experienced Senior Backend Engineer to join our Payments Platform team. In this role, you will design, build, and operate distributed systems that process hundreds of billions of dollars each year for millions of businesses worldwide. You will be responsible for low-latency transaction processing, bulletproof consistency, and building resilient APIs.
+
+Responsibilities:
+• Architect, build, and scale low-latency backend microservices using Python, Go, and PostgreSQL.
+• Design event-driven pipelines using Apache Kafka and message queues to power real-time settlement and authorization flows.
+• Implement distributed caching strategies with Redis to maintain sub-100ms response times globally.
+• Deploy and manage containerized services using Docker, Kubernetes (EKS), and Terraform on AWS.
+• Ensure adherence to strict financial regulatory standards, security benchmarks, and PCI-DSS compliance.
+• Instrument deep observability across services using Datadog, Prometheus, Grafana, and OpenTelemetry.
+• Collaborate with cross-functional engineering leads to drive high-availability architectural design reviews.
+
+Requirements:
+• 4+ years of professional backend software engineering experience.
+• Strong proficiency in Python or Go, with deep familiarity in modern backend frameworks (such as FastAPI, Django, or gRPC).
+• Extensive hands-on experience with relational databases (specifically PostgreSQL) and distributed SQL query optimization.
+• Solid background in distributed systems, event-driven architecture, and asynchronous messaging with Apache Kafka.
+• Experience with cloud infrastructure (AWS or GCP), Docker containerization, and Kubernetes orchestration.
+• Familiarity with security protocols, OAuth 2.0, authentication standards, and financial compliance.
+• Dedication to test-driven development (TDD), automated CI/CD pipelines, and robust code quality.

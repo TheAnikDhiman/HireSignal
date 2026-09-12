@@ -1,0 +1,35 @@
+Priya Sharma
+San Francisco, CA | priya.sharma@example.com | (415) 555-0192
+linkedin.com/in/priyasharma-dev | github.com/priyasharma-payments
+
+PROFESSIONAL SUMMARY
+Senior Backend Engineer with 6+ years of experience building high-throughput payment processing architectures, distributed transaction systems, and mission-critical financial APIs. Proven track record scaling microservices in Python, Go, and PostgreSQL handling over 18,000 requests/sec with 99.995% uptime.
+
+TECHNICAL SKILLS
+• Languages: Python, Go (Golang), SQL, TypeScript, Bash
+• Frameworks: FastAPI, Django, gRPC, Node.js, Express.js
+• Databases & Caching: PostgreSQL, Redis, DynamoDB, Elasticsearch
+• Cloud & Infrastructure: AWS (ECS, Lambda, RDS, S3), Docker, Kubernetes (k8s), Terraform
+• Architecture & Messaging: Apache Kafka, Event-Driven Architecture, Microservices, RESTful APIs, Distributed Systems
+• Observability & DevOps: Datadog, Prometheus, Grafana, OpenTelemetry, CI/CD, GitHub Actions
+• Testing & Compliance: PyTest, Unit Testing, PCI-DSS compliance, OAuth 2.0, JWT
+
+PROFESSIONAL EXPERIENCE
+
+Senior Backend Engineer | PayScale Financial Technologies
+San Francisco, CA | 2021 – Present
+• Architected and launched high-volume payment settlement pipeline using Python (FastAPI), Go, and Apache Kafka, processing $42M+ daily transaction volume.
+• Redesigned distributed database schema in PostgreSQL with automated read replicas and Redis caching tier, decreasing p99 API latency from 420ms to 68ms (84% reduction).
+• Containerized core payments microservices using Docker and deployed onto Amazon EKS with Terraform IaC, achieving zero-downtime rolling deployments.
+• Spearheaded migration from legacy monolithic REST endpoints to event-driven gRPC streaming, increasing transaction throughput by 3.4x.
+• Implemented end-to-end PCI-DSS Level 1 tokenization and cryptographic signature validation using OAuth 2.0 and JWT.
+
+Software Engineer | FinFlow Systems
+New York, NY | 2018 – 2021
+• Developed multi-currency ledger reconciliation service in Python and PostgreSQL, automating end-of-day settlement for 120,000+ merchant accounts.
+• Engineered asynchronous webhook delivery system backed by RabbitMQ and Redis, delivering 99.99% message delivery reliability under peak load.
+• Configured Datadog APM dashboards, Prometheus custom metrics, and PagerDuty alert escalation paths, reducing MTTR by 35%.
+• Authored comprehensive PyTest test suites with 92% code coverage across all financial ledger repositories.
+
+EDUCATION
+B.S. in Computer Science | University of California, Berkeley (2014 – 2018)
