@@ -1,0 +1,40 @@
+Machine Learning Engineer - NLP
+===============================
+Company: SignalForge AI
+Location: Remote - India
+
+About the role
+--------------
+Build and productionize NLP systems for document intelligence and ranking. The role combines model development, evaluation, APIs, and ML infrastructure.
+
+Required qualifications
+-----------------------
+2+ years of experience in machine learning engineering or applied ML.
+Strong Python and SQL.
+Hands-on scikit-learn and at least one deep learning framework such as PyTorch.
+NLP experience including text classification, embeddings, similarity, or information extraction.
+FastAPI or Flask for model-serving APIs.
+Docker and basic AWS experience.
+Model evaluation using precision, recall, F1, and error analysis.
+Experience with MLflow or another experiment/model tracking tool.
+
+Nice to have
+------------
+Airflow or another workflow orchestrator.
+PostgreSQL, Redis, Kubernetes.
+Transformers, vector search, or retrieval systems.
+Experience with resume, document, or enterprise text analytics.
+
+Responsibilities
+----------------
+Develop NLP features and ranking/classification models.
+Create reproducible training and evaluation pipelines.
+Expose models through tested, rate-limited APIs.
+Track model experiments and investigate failure modes.
+Work with product engineers to ship ML features into customer workflows.
+
+Success in the first 90 days
+----------------------------
+Ship at least one production-quality feature and document the design.
+Improve one measurable quality metric such as latency, reliability, model F1, or user conversion.
+Add or strengthen automated tests and observability around owned functionality.

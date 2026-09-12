@@ -1,0 +1,40 @@
+Full-Stack AI Engineer
+======================
+Company: OrbitWorks Labs
+Location: Noida / Hybrid
+
+About the role
+--------------
+Build polished AI-powered web products from data and model layer through API and frontend. You will own product features end to end.
+
+Required qualifications
+-----------------------
+2+ years of software engineering experience.
+Strong Python plus modern JavaScript or TypeScript.
+React experience for production user interfaces.
+FastAPI or Node.js for backend services.
+SQL and relational database fundamentals; PostgreSQL preferred.
+Practical experience integrating ML or AI services into products.
+REST APIs, Git, testing, and Docker.
+Ability to reason about user experience, latency, reliability, and maintainability.
+
+Nice to have
+------------
+Tailwind CSS, Next.js, Redis, AWS, Kubernetes.
+NLP, recommendation systems, document processing, or LLM applications.
+CI/CD, observability, and product analytics.
+Experience owning a feature from prototype to production.
+
+Responsibilities
+----------------
+Design and ship AI-enabled web experiences.
+Build API contracts and backend services in FastAPI or Node.js.
+Implement responsive React interfaces with clear interaction states.
+Integrate ML pipelines and store structured results in PostgreSQL.
+Measure performance and iterate based on user feedback.
+
+Success in the first 90 days
+----------------------------
+Ship at least one production-quality feature and document the design.
+Improve one measurable quality metric such as latency, reliability, model F1, or user conversion.
+Add or strengthen automated tests and observability around owned functionality.

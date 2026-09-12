@@ -1,0 +1,41 @@
+Senior Backend Engineer
+=======================
+Company: Northstar Commerce
+Location: Bengaluru / Hybrid
+
+About the role
+--------------
+Build reliable backend services for a high-scale commerce and payments platform. Own API design, data access, distributed workflows, and production reliability.
+
+Required qualifications
+-----------------------
+4+ years of backend engineering experience.
+Strong Python experience and production API development.
+FastAPI or comparable Python web framework.
+PostgreSQL and SQL query optimization.
+Redis or another caching system.
+Kafka or another event-streaming platform.
+RESTful API design and microservices.
+Docker and practical cloud deployment experience; AWS preferred.
+Experience debugging production systems, monitoring services, and improving latency.
+
+Nice to have
+------------
+Kubernetes, Terraform, Linux, Nginx.
+Prometheus/Grafana observability.
+Idempotency, retries, audit logging, and event-driven architecture.
+Background in payments, checkout, or financial workflows.
+
+Responsibilities
+----------------
+Design and maintain FastAPI services used by customer-facing products.
+Model and optimize PostgreSQL data access patterns.
+Build asynchronous workflows with Kafka and Redis.
+Improve reliability, latency, logging, and service health.
+Collaborate with frontend, product, and infrastructure teams.
+
+Success in the first 90 days
+----------------------------
+Ship at least one production-quality feature and document the design.
+Improve one measurable quality metric such as latency, reliability, model F1, or user conversion.
+Add or strengthen automated tests and observability around owned functionality.
